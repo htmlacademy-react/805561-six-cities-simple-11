@@ -2,12 +2,12 @@ import Offers from '../../components/offers/offers';
 import Header from '../../components/header/header';
 import {Offer} from '../../types/types';
 
-type MainScreenProps = {
+type MainProps = {
   offersCount: number;
   offers: Offer[];
 }
 
-function Main({offersCount, offers}: MainScreenProps): JSX.Element {
+function Main({offersCount, offers}: MainProps): JSX.Element {
   return (
     <>
       <Header/>
@@ -70,7 +70,7 @@ function Main({offersCount, offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {<Offers offers={offers} /> }
+                <Offers offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">

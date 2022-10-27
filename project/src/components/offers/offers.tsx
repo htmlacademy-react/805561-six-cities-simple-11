@@ -1,14 +1,14 @@
 import {Offer} from '../../types/types';
 
-type Props = {
+type OffersProps = {
   offers:Offer[];
 }
 
-const Offers = ({offers}: Props): JSX.Element => (
+const Offers = ({offers}: OffersProps): JSX.Element => (
   <>
     {offers.map((offer: Offer) =>
       (
-        <article key="" className="cities__card place-card">
+        <article key={offer.id} className="cities__card place-card">
           {offer.mark && <div className="place-card__mark"><span>Premium</span></div> }
           <div className="cities__image-wrapper place-card__image-wrapper">
             <a href="#">

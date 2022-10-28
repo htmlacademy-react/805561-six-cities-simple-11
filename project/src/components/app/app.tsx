@@ -17,9 +17,11 @@ const App = ({offers, offersCount}:AppScreenProps): JSX.Element => (
       <Route path='/'>
         <Route index element={<Main offers={offers} offersCount={offersCount} />} />
         <Route path='/login' element={<Login />} />
-        //так как все-таки правильно? так?
+        {//так как все-таки правильно? так?
+        }
         <Route path='/offer/:id' element={<Room />} />
-        //или так?
+        {//или так?
+        }
         <Route path='/offer/'>
           <Route path='/offer/:id' element={<Room />} />
         </Route>

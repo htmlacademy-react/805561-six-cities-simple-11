@@ -9,7 +9,7 @@ type MainProps = {
 
 function Main({offersCount, offers}: MainProps): JSX.Element {
   return (
-    <>
+    <div className="page page--gray page--main">
       <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -79,7 +79,7 @@ function Main({offersCount, offers}: MainProps): JSX.Element {
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

@@ -1,5 +1,8 @@
 import {Link} from 'react-router-dom';
+
+import {AppRoute} from '../../const';
 import Header from '../../components/header/header';
+
 
 const NotFound = (): JSX.Element => (
   <div className="page page--gray page--main">
@@ -47,7 +50,7 @@ const NotFound = (): JSX.Element => (
           <section className="cities__no-places">
             <div className="cities__status-wrapper tabs__content">
               <b className="cities__status">404. Page not found</b>
-              <p className="cities__status-description"> <Link to="/">Вернуться на главную</Link></p>
+              <p className="cities__status-description"> <Link to={AppRoute.Root}>Вернуться на главную</Link></p>
             </div>
           </section>
           <div className="cities__right-section"></div>

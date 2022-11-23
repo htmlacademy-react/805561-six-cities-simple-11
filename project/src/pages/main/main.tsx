@@ -1,6 +1,7 @@
+import {Offer} from '../../types/types';
 import Offers from '../../components/offers/offers';
 import Header from '../../components/header/header';
-import {Offer} from '../../types/types';
+
 
 type MainProps = {
   offersCount: number;

@@ -1,7 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 
 const FormReviews = (): JSX.Element => {
-
   const [isDisabledSubmit, setDisabledSubmit] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -9,20 +8,20 @@ const FormReviews = (): JSX.Element => {
     review: '',
   });
 
-  //как-то слабо понятно, где  брать типы для event...
   const fieldChangeHandle = (evt:ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
 
-    //тоже отрабатывает с опозданием на один шаг
-    // eslint-disable-next-line no-console
-    console.log(`name ${ name}`, `value ${value}`); console.log(`formData.rating ${formData.rating}`); console.log(`formData.review.length ${formData.review.length}`);
-
-    if(formData.rating && formData.review.length > 40 && formData.review.length < 300 ){
+    /* if(formData.rating && formData.review.length > 40 && formData.review.length < 300 ){
       setDisabledSubmit(false);
     }else{
       setDisabledSubmit(true);
-    }
+    }*/
+    const isDisabled = formData.rating && formData.review.length > 40 && formData.review.length < 300;
+    //теперь беда с типизацией
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    setDisabledSubmit(isDisabled);
   };
 
   return (

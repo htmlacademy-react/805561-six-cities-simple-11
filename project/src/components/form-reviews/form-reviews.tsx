@@ -17,10 +17,7 @@ const FormReviews = (): JSX.Element => {
     }else{
       setDisabledSubmit(true);
     }*/
-    const isDisabled = formData.rating && formData.review.length > 40 && formData.review.length < 300;
-    //теперь беда с типизацией
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    const isDisabled = Boolean(formData.rating && formData.review.length > 40 && formData.review.length < 300);
     setDisabledSubmit(isDisabled);
   };
 

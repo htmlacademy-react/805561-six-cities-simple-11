@@ -6,6 +6,8 @@ type Offer = {
   price: number;
   name: string;
   type: string;
+  lat: number;
+  lng: number;
 }
 
 export type {Offer};

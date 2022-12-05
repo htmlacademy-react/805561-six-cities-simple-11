@@ -5,13 +5,13 @@ import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
-import {CityType, OfferType} from '../../types/types';
+import {TCity, TOffer} from '../../types/types';
 
 
 type AppProps = {
   offersCount: number;
-  offers: OfferType[];
-  city: CityType;
+  offers: TOffer[];
+  city: TCity;
 }
 
 const App = ({offers, offersCount, city}:AppProps): JSX.Element => (

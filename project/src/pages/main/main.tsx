@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {CityType, OfferType} from '../../types/types';
+import {TCity, TOffer} from '../../types/types';
 import Offers from '../../components/offers/offers';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -8,8 +8,8 @@ import Map from '../../components/map/map';
 
 type MainProps = {
   offersCount: number;
-  offers: OfferType[];
-  city: CityType;
+  offers: TOffer[];
+  city: TCity;
 }
 
 function Main({offersCount, offers, city}: MainProps): JSX.Element {

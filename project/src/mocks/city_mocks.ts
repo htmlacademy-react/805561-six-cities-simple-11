@@ -1,6 +1,6 @@
-import {CityType} from '../types/types';
+import {TCity} from '../types/types';
 
-const City: CityType = {
+const City: TCity = {
   title: 'Амстердам',
   lat: 52.3740300,
   lng: 4.8896900,

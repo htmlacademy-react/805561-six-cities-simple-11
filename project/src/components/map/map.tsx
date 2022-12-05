@@ -3,13 +3,13 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
-import {CityType, OfferType} from '../../types/types';
+import {TCity, TOffer} from '../../types/types';
 import useMap from '../../hooks/useMap';
 
 
 type MapProps = {
-  city: CityType;
-  points: OfferType[];
+  city: TCity;
+  points: TOffer[];
   selectedPoint: string;
 };
 

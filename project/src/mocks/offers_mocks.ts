@@ -1,6 +1,6 @@
-import {OfferType} from '../types/types';
+import {TOffer} from '../types/types';
 
-const OfferData:OfferType[] = [
+const OfferData:TOffer[] = [
   {
     id: '1',
     mark: true,

@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
-import {OfferType} from '../../types/types';
+import {TOffer} from '../../types/types';
 
 
 type OfferProps = {
-  offer:OfferType;
-  mouseOverHandler: (offer: OfferType) => void;
+  offer:TOffer;
+  mouseOverHandler: (offer: TOffer) => void;
 }
 
 const Offer = ({offer, mouseOverHandler}: OfferProps): JSX.Element =>(

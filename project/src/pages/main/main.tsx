@@ -1,14 +1,25 @@
-import {Offer} from '../../types/types';
+import React, {useState} from 'react';
+
+import {TCity, TOffer} from '../../types/types';
 import Offers from '../../components/offers/offers';
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
 
 
 type MainProps = {
   offersCount: number;
-  offers: Offer[];
+  offers: TOffer[];
+  city: TCity;
 }
 
-function Main({offersCount, offers}: MainProps): JSX.Element {
+function Main({offersCount, offers, city}: MainProps): JSX.Element {
+  const [selectedPoint, setSelectedPoint] = useState('');
+
+  const onListOfferHover = (listOfferId:string) :void =>{
+    const currentPointId = listOfferId;
+    setSelectedPoint(currentPointId);
+  };
+
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -71,11 +82,14 @@ function Main({offersCount, offers}: MainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Offers offers={offers} />
+                <Offers
+                  offers={offers}
+                  onListOfferHover={onListOfferHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <Map city={city} points={offers} selectedPoint={selectedPoint}/>
             </div>
           </div>
         </div>

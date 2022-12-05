@@ -1,4 +1,4 @@
-type Offer = {
+type TOffer = {
   id: string;
   mark?: boolean;
   image: string;
@@ -6,6 +6,15 @@ type Offer = {
   price: number;
   name: string;
   type: string;
+  lat: number;
+  lng: number;
 }
 
-export type {Offer};
+type TCity = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+};
+
+export type {TOffer, TCity};

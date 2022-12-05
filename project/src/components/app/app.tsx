@@ -5,18 +5,20 @@ import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
-import {Offer} from '../../types/types';
+import {TCity, TOffer} from '../../types/types';
+
 
 type AppProps = {
   offersCount: number;
-  offers: Offer[];
+  offers: TOffer[];
+  city: TCity;
 }
 
-const App = ({offers, offersCount}:AppProps): JSX.Element => (
+const App = ({offers, offersCount, city}:AppProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route path={AppRoute.Root}>
-        <Route index element={<Main offers={offers} offersCount={offersCount} />} />
+        <Route index element={<Main offers={offers} offersCount={offersCount} city={city} />} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Room} element={<Room />} />
         <Route path='*' element={<NotFound />} />

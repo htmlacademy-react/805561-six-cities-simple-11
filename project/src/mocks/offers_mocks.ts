@@ -1,6 +1,6 @@
-import {Offer} from '../types/types';
+import {OfferType} from '../types/types';
 
-const OfferData:Offer[] = [
+const OfferData:OfferType[] = [
   {
     id: '1',
     mark: true,
@@ -8,7 +8,9 @@ const OfferData:Offer[] = [
     alt: 'Place image',
     price: 120,
     name: 'Beautiful &amp; luxurious apartment at great location',
-    type: 'Apartment'
+    type: 'Apartment',
+    lat: 52.3909553943508,
+    lng: 4.85309666406198
   },
   {
     id: '2',
@@ -16,7 +18,9 @@ const OfferData:Offer[] = [
     alt: 'Place image',
     price: 80,
     name: 'Wood and stone place',
-    type: 'Private room'
+    type: 'Private room',
+    lat: 52.3609553943508,
+    lng:4.85309666406198
   },
   {
     id: '3',
@@ -24,7 +28,9 @@ const OfferData:Offer[] = [
     alt: 'Place image',
     price: 132,
     name: 'Canal View Prinsengracht',
-    type: 'Apartment'
+    type: 'Apartment',
+    lat: 52.3909553943508,
+    lng: 4.929309666406198
   },
   {
     id: '4',
@@ -33,7 +39,9 @@ const OfferData:Offer[] = [
     alt: 'Place image',
     price: 180,
     name: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment'
+    type: 'Apartment',
+    lat: 52.3809553943508,
+    lng:4.939309666406198
   },
   {
     id: '5',
@@ -41,7 +49,9 @@ const OfferData:Offer[] = [
     alt: 'Place image',
     price: 80,
     name: 'Wood and stone place',
-    type: 'Private room'
+    type: 'Private room',
+    lat: 52.3709553943508,
+    lng: 4.909309666406198
   },
 ];
 

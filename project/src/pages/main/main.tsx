@@ -81,15 +81,16 @@ function Main({offersCount, offers, city}: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <Offers
-                  offers={offers}
-                  onListOfferHover={onListOfferHover}
-                />
-              </div>
+              <Offers
+                offers={offers}
+                onListOfferHover={onListOfferHover}
+                main
+              />
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} selectedPoint={selectedPoint}/>
+              <section className="cities__map map">
+                <Map city={city} points={offers} selectedPoint={selectedPoint}/>
+              </section>
             </div>
           </div>
         </div>

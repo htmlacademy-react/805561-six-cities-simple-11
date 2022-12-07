@@ -10,7 +10,7 @@ import useMap from '../../hooks/useMap';
 type MapProps = {
   city: TCity;
   points: TOffer[];
-  selectedPoint: string;
+  selectedPoint?: string;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -47,8 +47,8 @@ function Map({city, points, selectedPoint}:MapProps): JSX.Element {
   }, [map, points, selectedPoint]);
 
   return (
-    <section
-      className="cities__map map"
+    <div
+      style={{width: '100%', height: '100%'}}
       ref={mapRef}
     />
   );

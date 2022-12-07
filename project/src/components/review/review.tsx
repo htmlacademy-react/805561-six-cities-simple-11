@@ -1,6 +1,3 @@
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
-
 import {TReview} from '../../types/types';
 
 

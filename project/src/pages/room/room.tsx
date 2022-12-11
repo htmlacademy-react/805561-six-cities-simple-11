@@ -160,9 +160,11 @@ const Room = ({reviews, nearOffers}:RoomProps): JSX.Element => (
             <Reviews reviews={reviews}/>
           </div>
         </div>
-        <section className="property__map map">
-          <Map city={City} points={nearOffers}/>
-        </section>
+        <Map
+          city={City}
+          points={nearOffers}
+          main={false}
+        />
       </section>
       <div className="container">
         <section className="near-places places">

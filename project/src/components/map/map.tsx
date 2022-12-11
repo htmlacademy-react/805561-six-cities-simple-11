@@ -11,6 +11,7 @@ type MapProps = {
   city: TCity;
   points: TOffer[];
   selectedPoint?: string;
+  main?: boolean;
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -25,9 +26,10 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [14, 40],
 });
 
-function Map({city, points, selectedPoint}:MapProps): JSX.Element {
+function Map({city, points, selectedPoint, main}:MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const className = main ? 'cities' : 'property';
 
   useEffect(() => {
     if (map) {
@@ -47,8 +49,8 @@ function Map({city, points, selectedPoint}:MapProps): JSX.Element {
   }, [map, points, selectedPoint]);
 
   return (
-    <div
-      style={{width: '100%', height: '100%'}}
+    <section
+      className = {`${className}__map map`}
       ref={mapRef}
     />
   );

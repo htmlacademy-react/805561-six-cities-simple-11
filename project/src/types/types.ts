@@ -17,4 +17,13 @@ type TCity = {
   zoom: number;
 };
 
-export type {TOffer, TCity};
+type TReview = {
+  id: number;
+  avatar: string;
+  userName: string;
+  rating: number;
+  text: string;
+  time: string;
+};
+
+export type {TOffer, TCity, TReview};

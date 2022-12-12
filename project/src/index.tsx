@@ -7,7 +7,7 @@ import {OfferData} from './mocks/offers_mocks';
 import {ReviewsData} from './mocks/reviews_mocks';
 import {City} from './mocks/city_mocks';
 import App from './components/app/app';
-import {Cities} from './const';
+import {CITIES, FILTERS} from './const';
 
 
 const root = ReactDOM.createRoot(
@@ -20,7 +20,8 @@ root.render(
       <App
         nearOffers={OfferData.slice(0, 3)}
         city={City}
-        cities={Cities}
+        cities={CITIES}
+        filters={FILTERS}
         reviews={ReviewsData}
       />
     </Provider>

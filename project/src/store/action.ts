@@ -6,4 +6,12 @@ export const selectionCity = createAction('offers/selectionCity',
   })
 );
 
-export const getOfferList = createAction('offers/getOfferList');
+export const sortByCity = createAction('offers/filterByCity');
+
+export const selectionFilter = createAction('offers/selectionFilter',
+  (value: string) => ({
+    payload: value,
+  })
+);
+
+export const sortByFilter = createAction('offers/sortByFilter');

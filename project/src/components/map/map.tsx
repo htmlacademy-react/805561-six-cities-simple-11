@@ -7,7 +7,6 @@ import {TCity, TOffer} from '../../types/types';
 import useMap from '../../hooks/useMap';
 
 
-
 type MapProps = {
   city: TCity;
   points: TOffer[];

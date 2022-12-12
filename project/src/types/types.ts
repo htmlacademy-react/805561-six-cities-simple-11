@@ -4,6 +4,7 @@ type TOffer = {
   image: string;
   alt: string;
   price: number;
+  rating: number;
   name: string;
   type: string;
   city: string;

@@ -16,7 +16,7 @@ const CityList = ({cities}:CityListProps): JSX.Element => {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {cities.map((city) => {
-            const isActive = (city === selectedCity);
+            const isActive = city === selectedCity;
             return(
               <li key={city} className="locations__item"
                 onClick={() => {

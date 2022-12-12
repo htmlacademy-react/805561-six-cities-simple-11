@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 import {TCity, TOffer} from '../../types/types';
 import useMap from '../../hooks/useMap';
-import {useAppSelector} from '../../hooks';
+
 
 
 type MapProps = {

@@ -4,8 +4,10 @@ type TOffer = {
   image: string;
   alt: string;
   price: number;
+  rating: number;
   name: string;
   type: string;
+  city: string;
   lat: number;
   lng: number;
 }
@@ -25,5 +27,6 @@ type TReview = {
   text: string;
   time: string;
 };
+
 
 export type {TOffer, TCity, TReview};

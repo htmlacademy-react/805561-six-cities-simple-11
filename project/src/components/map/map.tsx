@@ -26,13 +26,16 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [14, 40],
 });
 
-function Map({city, points, selectedPoint, main}:MapProps): JSX.Element {
+function Map({points, city, selectedPoint, main}:MapProps): JSX.Element {
+
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const className = main ? 'cities' : 'property';
 
   useEffect(() => {
+
     if (map) {
+      const markerGroup = leaflet.layerGroup().addTo(map);
       points.forEach((point) => {
         leaflet
           .marker({
@@ -43,8 +46,11 @@ function Map({city, points, selectedPoint, main}:MapProps): JSX.Element {
               ? currentCustomIcon
               : defaultCustomIcon,
           })
-          .addTo(map);
+          .addTo(markerGroup);
       });
+      return () => {
+        markerGroup.clearLayers();
+      };
     }
   }, [map, points, selectedPoint]);
 
@@ -55,5 +61,6 @@ function Map({city, points, selectedPoint, main}:MapProps): JSX.Element {
     />
   );
 }
+
 
 export default Map;

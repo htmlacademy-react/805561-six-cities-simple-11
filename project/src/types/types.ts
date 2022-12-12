@@ -6,6 +6,7 @@ type TOffer = {
   price: number;
   name: string;
   type: string;
+  city: string;
   lat: number;
   lng: number;
 }
@@ -25,5 +26,6 @@ type TReview = {
   text: string;
   time: string;
 };
+
 
 export type {TOffer, TCity, TReview};

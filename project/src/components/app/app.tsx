@@ -12,14 +12,15 @@ type AppProps = {
   nearOffers: TOffer[];
   city: TCity;
   cities: string[];
+  filters: string[];
   reviews: TReview[];
 }
 
-const App = ({nearOffers, city, cities, reviews}:AppProps): JSX.Element => (
+const App = ({nearOffers, city, cities, filters, reviews}:AppProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
       <Route path={AppRoute.Root}>
-        <Route index element={<Main city={city} cities={cities} />} />
+        <Route index element={<Main city={city} cities={cities} filters={filters}/>} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Room} element={<Room reviews={reviews} nearOffers={nearOffers} />} />
         <Route path='*' element={<NotFound />} />

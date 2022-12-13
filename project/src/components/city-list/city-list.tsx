@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import cn from 'classnames';
-import {getOfferList, selectionCity} from '../../store/action';
+import {sortByCity, selectionCity} from '../../store/action';
 
 type CityListProps = {
   cities: string[];
@@ -21,7 +21,7 @@ const CityList = ({cities}:CityListProps): JSX.Element => {
               <li key={city} className="locations__item"
                 onClick={() => {
                   dispatch(selectionCity(city));
-                  dispatch(getOfferList());
+                  dispatch(sortByCity());
                 }}
               >
                 <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active':isActive})} href="#">

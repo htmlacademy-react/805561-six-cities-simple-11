@@ -1,5 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 
+
 const FormReviews = (): JSX.Element => {
   const [isDisabledSubmit, setDisabledSubmit] = useState(true);
 
@@ -12,13 +13,9 @@ const FormReviews = (): JSX.Element => {
     const {name, value} = evt.target;
     setFormData({...formData, [name]: value});
 
-    /* if(formData.rating && formData.review.length > 40 && formData.review.length < 300 ){
-      setDisabledSubmit(false);
-    }else{
-      setDisabledSubmit(true);
-    }*/
-    const isDisabled = Boolean(formData.rating && formData.review.length > 40 && formData.review.length < 300);
-    setDisabledSubmit(isDisabled);
+    const isDisabled = formData.rating && formData.review.length > 40 && formData.review.length < 300;
+
+    setDisabledSubmit(!isDisabled);
   };
 
   return (

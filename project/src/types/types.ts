@@ -33,10 +33,13 @@ export type TOffer = {
 }
 
 export type TCity = {
-  title: string;
   lat: number;
   lng: number;
   zoom: number;
+};
+
+export type TCities = {
+  [propertyName: string]: TCity;
 };
 
 export type TReview = {

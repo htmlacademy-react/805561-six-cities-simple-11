@@ -3,7 +3,7 @@ import {AppRoute} from '../../const';
 
 import {TOffer} from '../../types/types';
 
-const conversionRating = (rating:number) => {
+const convertRating = (rating:number) => {
   const widtth = `${Math.round(rating) * 20 }%`;
   return {width: widtth};
 };
@@ -35,7 +35,7 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={conversionRating(offer.rating)}/>
+            <span style={convertRating(offer.rating)}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

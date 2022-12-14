@@ -60,7 +60,7 @@ export const CITY: TCity[] = [
   }
 ];
 
-export const CITIES = CITY.map(a => a.title);
+export const CITIES = CITY.map((a) => a.title);
 
 export const INITITIAL_CITY = 'Paris';
 export const INITIAL_SORT = 'Popular';

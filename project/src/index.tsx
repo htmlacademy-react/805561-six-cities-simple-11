@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 
 import {store} from './store';
-import {OfferData} from './mocks/offers_mocks';
 import {ReviewsData} from './mocks/reviews_mocks';
-import {City} from './mocks/city_mocks';
 import App from './components/app/app';
-import {CITIES, FILTERS} from './const';
+import ErrorMessage from './components/error-message/error-message';
+import {FILTERS} from './const';
+import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,10 +20,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ErrorMessage />
       <App
-        nearOffers={OfferData.slice(0, 3)}
-        city={City}
-        cities={CITIES}
         filters={FILTERS}
         reviews={ReviewsData}
       />

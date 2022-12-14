@@ -1,25 +1,45 @@
-type TOffer = {
-  id: string;
-  mark?: boolean;
-  image: string;
-  alt: string;
+export type TOffer = {
+  bedrooms: number;
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+    name: string;
+  };
+  description: string;
+  goods: [string];
+  host: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+  id: number;
+  images: [string];
+  isPremium: boolean;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  maxAdults: number;
+  previewImage: string;
   price: number;
   rating: number;
-  name: string;
+  title: string;
   type: string;
-  city: string;
-  lat: number;
-  lng: number;
 }
 
-type TCity = {
+export type TCity = {
   title: string;
   lat: number;
   lng: number;
   zoom: number;
 };
 
-type TReview = {
+export type TReview = {
   id: number;
   avatar: string;
   userName: string;
@@ -28,5 +48,15 @@ type TReview = {
   time: string;
 };
 
+export type AuthData = {
+  login: string;
+  password: string;
+};
 
-export type {TOffer, TCity, TReview};
+export type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+

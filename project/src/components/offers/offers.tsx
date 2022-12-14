@@ -4,7 +4,7 @@ import Offer from '../offer/offer';
 
 type OffersProps = {
   offers:TOffer[];
-  onListOfferHover?: (listOfferId:string) => void;
+  onListOfferHover?: (listOfferId:number) => void;
   main: boolean;
 }
 
@@ -19,9 +19,9 @@ const Offers = ({offers, onListOfferHover, main}: OffersProps): JSX.Element => {
     }
   );
 
-  const mouseOverHandler = (offer:TOffer): void => {
+  const mouseOverHandler = (id:number): void => {
     if(onListOfferHover){
-      onListOfferHover(offer.id);
+      onListOfferHover(id);
     }
   };
 

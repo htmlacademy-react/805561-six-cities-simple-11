@@ -1,19 +1,39 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {selectionCity, sortByCity, selectionFilter, sortByFilter} from './action';
-import {OfferData} from '../mocks/offers_mocks';
-import {INITITIAL_CITY, Filter, INITIAL_SORT} from '../const';
+import {
+  selectionCity,
+  sortByCity,
+  selectionFilter,
+  sortByFilter,
+  loadOffers,
+  requireAuthorization,
+  setOffersDataLoadingStatus,
+  setError
+} from './action';
+import {INITITIAL_CITY, Filter, INITIAL_SORT, AuthorizationStatus} from '../const';
 import {TOffer} from '../types/types';
 
 
-const initialData = OfferData.filter((offer) => offer.city === INITITIAL_CITY );
+type TInitialState = {
+  city: string;
+  offerList: TOffer[];
+  offerListSortedByCity: TOffer[];
+  currentFilter: string;
+  authorizationStatus: AuthorizationStatus;
+  isOffersDataLoading: boolean;
+  error: string | null;
+}
 
-const initialState = {
+const initialState:TInitialState = {
   city: INITITIAL_CITY,
-  offerList: initialData,
+  offerList: [],
+  offerListSortedByCity: [],
   currentFilter: INITIAL_SORT,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isOffersDataLoading: false,
+  error: null,
 };
 
-const sort = function(offers: TOffer[], currentFilter: string): TOffer[] {
+const sortOffers = function(offers: TOffer[], currentFilter: string): TOffer[] {
   const sortedOffers = offers.slice();
   switch (currentFilter) {
     case Filter.PriceUp:
@@ -35,16 +55,29 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload;
     })
     .addCase(sortByCity, (state) => {
-      state.offerList = OfferData.filter((offer) =>
-        offer.city === state.city
+      state.offerListSortedByCity = state.offerList.filter((offer) =>
+        offer.city.name === state.city
       );
     })
     .addCase(selectionFilter, (state, action) => {
       state.currentFilter = action.payload;
     })
     .addCase(sortByFilter, (state) => {
-      state.offerList = sort(state.offerList, state.currentFilter);
+      state.offerListSortedByCity = sortOffers(state.offerListSortedByCity, state.currentFilter);
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offerList = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
+
 });
 
 export {reducer};

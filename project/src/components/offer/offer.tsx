@@ -3,10 +3,14 @@ import {AppRoute} from '../../const';
 
 import {TOffer} from '../../types/types';
 
+const conversionRating = (rating:number) => {
+  const widtth = `${Math.round(rating) * 20 }%`;
+  return {width: widtth};
+};
 
 type OfferProps = {
   offer:TOffer;
-  mouseOverHandler: (offer: TOffer) => void;
+  mouseOverHandler: (offer: number) => void;
   main: boolean;
 }
 
@@ -14,11 +18,11 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
   const className = main ? 'cities' : 'near-places';
 
   return(
-    <article key={offer.id} className={`${className}__card place-card`} onMouseOver={() => mouseOverHandler(offer)} >
-      {offer.mark && <div className="place-card__mark"><span>Premium</span></div> }
+    <article key={offer.id} className={`${className}__card place-card`} onMouseOver={() => mouseOverHandler(offer.id)} >
+      {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div> }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={offer.image} width="260" height="200" alt={offer.alt}/>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt={offer.title}/>
         </a>
       </div>
       <div className="place-card__info">
@@ -31,12 +35,12 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}/>
+            <span style={conversionRating(offer.rating)}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{offer.name}</Link>
+          <Link to={AppRoute.Room}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

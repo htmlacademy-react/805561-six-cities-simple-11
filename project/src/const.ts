@@ -1,4 +1,4 @@
-import {TCity} from './types/types';
+import {TCities} from './types/types';
 
 export enum AppRoute {
   Login = '/login',
@@ -21,46 +21,41 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const CITY: TCity[] = [
-  {
-    title: 'Paris',
+
+export const CITY: TCities = {
+  Paris: {
     lat: 48.8534100,
     lng: 2.3488000,
     zoom: 12,
   },
-  {
-    title: 'Cologne',
+  Cologne: {
     lat: 50.9333300,
     lng: 6.9500000,
     zoom: 12,
   },
-  {
-    title: 'Brussels',
+  Brussels: {
     lat: 50.8504500,
     lng: 4.3487800,
     zoom: 12,
   },
-  {
-    title: 'Амстердам',
+  Amsterdam:{
     lat: 52.3740300,
     lng: 4.8896900,
     zoom: 12,
   },
-  {
-    title: 'Hamburg',
+  Hamburg: {
     lat: 53.5753200,
     lng: 10.0153400,
     zoom: 12,
   },
-  {
-    title: 'Dusseldorf',
+  Dusseldorf: {
     lat: 51.2217200,
     lng: 6.7761600,
     zoom: 12,
   }
-];
+};
 
-export const CITIES = CITY.map((a) => a.title);
+export const CITIES = Object.keys(CITY);
 
 export const INITITIAL_CITY = 'Paris';
 export const INITIAL_SORT = 'Popular';

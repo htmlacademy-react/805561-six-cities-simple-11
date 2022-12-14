@@ -26,4 +26,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const setError = createAction<string | null>('offers/setError');
 
-export const redirectToRoute = createAction<AppRoute>('game/redirectToRoute');
+export const redirectToRoute = createAction<AppRoute>('user/redirectToRoute');

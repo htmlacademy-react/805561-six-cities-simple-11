@@ -8,7 +8,7 @@ import useMap from '../../hooks/useMap';
 
 
 type MapProps = {
-  selectedCity?: string;
+  selectedCity: string;
   points: TOffer[];
   selectedPoint?: number;
   main?: boolean;
@@ -28,11 +28,7 @@ const currentCustomIcon = leaflet.icon({
 
 function Map({points, selectedCity, selectedPoint, main}:MapProps): JSX.Element {
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const currentCity: TCity = CITY.find((city) =>
-    city.title === selectedCity
-  );
+  const currentCity: TCity = CITY[selectedCity];
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, currentCity);

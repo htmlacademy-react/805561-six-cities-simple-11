@@ -1,5 +1,5 @@
 import Offers from '../../components/offers/offers';
-import {CITY} from '../../const';
+
 import { TReview} from '../../types/types';
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
@@ -140,7 +140,7 @@ const Room = ({reviews}:RoomProps): JSX.Element => {
             </div>
           </div>
           <Map
-            selectedCity={CITY[1].title}//временное решение
+            selectedCity={'Paris'}//временное решение
             points={OfferList.slice(0, 3)}
             main={false}
           />

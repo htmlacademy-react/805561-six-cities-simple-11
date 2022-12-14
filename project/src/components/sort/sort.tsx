@@ -12,14 +12,6 @@ const Filter = ({filters}: SortProps): JSX.Element => {
   const {currentFilter} = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  /*const className = cn(
-      'places__list',
-      {'cities__places-list': main,
-        'tabs__content': main,
-        'near-places__list': !main,
-      }
-    );*/
-
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>

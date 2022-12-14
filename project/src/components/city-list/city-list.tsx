@@ -2,12 +2,10 @@ import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import cn from 'classnames';
 import {sortByCity, selectionCity} from '../../store/action';
+import {CITIES} from '../../const';
 
-type CityListProps = {
-  cities: string[];
-}
 
-const CityList = ({cities}:CityListProps): JSX.Element => {
+const CityList = (): JSX.Element => {
   const selectedCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
@@ -15,7 +13,7 @@ const CityList = ({cities}:CityListProps): JSX.Element => {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((city) => {
+          {CITIES.map((city) => {
             const isActive = city === selectedCity;
             return(
               <li key={city} className="locations__item"

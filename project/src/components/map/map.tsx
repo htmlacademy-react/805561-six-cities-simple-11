@@ -2,15 +2,15 @@ import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT, CITY} from '../../const';
 import {TCity, TOffer} from '../../types/types';
 import useMap from '../../hooks/useMap';
 
 
 type MapProps = {
-  city: TCity;
+  selectedCity?: string;
   points: TOffer[];
-  selectedPoint?: string;
+  selectedPoint?: number;
   main?: boolean;
 };
 
@@ -26,21 +26,27 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [14, 40],
 });
 
-function Map({points, city, selectedPoint, main}:MapProps): JSX.Element {
+function Map({points, selectedCity, selectedPoint, main}:MapProps): JSX.Element {
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const currentCity: TCity = CITY.find((city) =>
+    city.title === selectedCity
+  );
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, currentCity);
+
   const className = main ? 'cities' : 'property';
 
   useEffect(() => {
-
     if (map) {
       const markerGroup = leaflet.layerGroup().addTo(map);
       points.forEach((point) => {
         leaflet
           .marker({
-            lat: point.lat,
-            lng: point.lng,
+            lat: point.location.latitude,
+            lng: point.location.longitude,
           }, {
             icon: (point.id === selectedPoint)
               ? currentCustomIcon
@@ -48,11 +54,12 @@ function Map({points, city, selectedPoint, main}:MapProps): JSX.Element {
           })
           .addTo(markerGroup);
       });
+      map.setView({lat:currentCity.lat, lng:currentCity.lng} );
       return () => {
         markerGroup.clearLayers();
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, selectedCity]);
 
   return (
     <section

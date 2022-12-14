@@ -1,37 +1,37 @@
 import React, {useState} from 'react';
 
-import {TCity} from '../../types/types';
 import Offers from '../../components/offers/offers';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import CityList from '../../components/city-list/city-list';
 import {useAppSelector} from '../../hooks';
 import Filter from '../../components/sort/sort';
+import MainEmpty from '../main-empty/main-empty';
 
 
 type MainProps = {
-  city: TCity;
-  cities: string[];
   filters: string[];
 }
 
-function Main({city, cities, filters}: MainProps): JSX.Element {
-  const selectedOffers = useAppSelector((state) => state.offerList);
+function Main({filters}: MainProps): JSX.Element {
+  const selectedOffers = useAppSelector((state) => state.offerListSortedByCity);
   const selectedCity = useAppSelector((state) => state.city);
+  const [selectedPoint, setSelectedPoint] = useState(0);
 
-  const [selectedPoint, setSelectedPoint] = useState('');
-
-  const onListOfferHover = (listOfferId:string) :void =>{
-    const currentPointId = listOfferId;
-    setSelectedPoint(currentPointId);
+  const onListOfferHover = (listOfferId:number) :void =>{
+    setSelectedPoint(listOfferId);
   };
+
+  if (selectedOffers.length === 0) {
+    return <MainEmpty />;
+  }
 
   return (
     <div className="page page--gray page--main">
       <Header/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CityList cities={cities}/>
+        <CityList />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -46,7 +46,7 @@ function Main({city, cities, filters}: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                city={city}
+                selectedCity={selectedCity}
                 points={selectedOffers}
                 selectedPoint={selectedPoint}
                 main

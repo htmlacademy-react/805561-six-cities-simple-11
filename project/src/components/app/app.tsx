@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
@@ -8,6 +8,8 @@ import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
 import {TReview} from '../../types/types';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 type AppProps = {
@@ -27,7 +29,7 @@ const App = ({filters, reviews}:AppProps): JSX.Element => {
   }
 
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root}>
           <Route index element={<Main filters={filters} />}/>
@@ -36,7 +38,7 @@ const App = ({filters, reviews}:AppProps): JSX.Element => {
           <Route path='*' element={<NotFound/>}/>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 };
 

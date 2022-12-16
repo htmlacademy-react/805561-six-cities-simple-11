@@ -1,16 +1,16 @@
 import {useRef, FormEvent} from 'react';
-import {useNavigate} from 'react-router-dom';
+//import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
 import {loginAction} from '../../store/api-actions';
 import {AuthData} from '../../types/types';
-import {AppRoute} from '../../const';
+//import {AppRoute} from '../../const';
 
 const Login = (): JSX.Element => {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -53,7 +53,8 @@ const Login = (): JSX.Element => {
                 <label className="visually-hidden">Password</label>
                 <input className="login__input form__input" type="password" name="password" placeholder="Password" ref={passwordRef} required/>
               </div>
-              <button className="login__submit form__submit button" type="submit" onClick={() => navigate(AppRoute.Root)}>Sign in</button>
+              {/*<button className="login__submit form__submit button" type="submit" onClick={() => navigate(AppRoute.Root)}>Sign in</button>*/}
+              <button className="login__submit form__submit button" type="submit" >Sign in</button>
             </form>
           </section>
           <section className="locations locations--login locations--current">

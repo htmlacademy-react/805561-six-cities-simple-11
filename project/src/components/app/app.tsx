@@ -19,8 +19,6 @@ type AppProps = {
 
 const App = ({filters, reviews}:AppProps): JSX.Element => {
 
-  //const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  //const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const {isOffersDataLoading, authorizationStatus} = useAppSelector((state) => state);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {

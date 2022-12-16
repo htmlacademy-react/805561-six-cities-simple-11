@@ -7,7 +7,7 @@ import {logoutAction} from '../../store/api-actions';
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const {authorizationStatus} = useAppSelector((state) => state);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   return(
@@ -41,33 +41,34 @@ const Header = (): JSX.Element => {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {isAuthorized &&
+                {!isAuthorized &&
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to="/login" >
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__login">Sign in</span>
-                    </a>
+                      <span className="header__login" >Sign in</span>
+                    </Link>
                   </li>}
-                {!isAuthorized &&
-                  <li className="header__nav-item user">
-                    <div className="header__nav-profile">
-                      <div className="header__avatar-wrapper user__avatar-wrapper"/>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </div>
-                  </li>}
-                {!isAuthorized &&
-                  <li className="header__nav-item">
-                    <Link
-                      className="header__nav-link"
-                      to="/"
-                      onClick={(evt) => {
-                        evt.preventDefault();
-                        dispatch(logoutAction());
-                      }}
-                    >
-                      <span className="header__signout">Sign out</span>
-                    </Link >
-                  </li> }
+                {isAuthorized &&
+                  <>
+                    <li className="header__nav-item user">
+                      <div className="header__nav-profile">
+                        <div className="header__avatar-wrapper user__avatar-wrapper"/>
+                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      </div>
+                    </li>
+                    <li className="header__nav-item">
+                      <Link
+                        className="header__nav-link"
+                        to="/"
+                        onClick={(evt) => {
+                          evt.preventDefault();
+                          dispatch(logoutAction());
+                        }}
+                      >
+                        <span className="header__signout">Sign out</span>
+                      </Link >
+                    </li>
+                  </>}
               </ul>
             </nav>
           </div>

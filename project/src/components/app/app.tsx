@@ -6,7 +6,6 @@ import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
-import {TReview} from '../../types/types';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
@@ -14,12 +13,13 @@ import browserHistory from '../../browser-history';
 
 type AppProps = {
   filters: string[];
-  reviews: TReview[];
 }
 
-const App = ({filters, reviews}:AppProps): JSX.Element => {
+const App = ({filters}:AppProps): JSX.Element => {
 
   const {isOffersDataLoading, authorizationStatus} = useAppSelector((state) => state);
+
+  const {currentOffer, currentOfferId, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
@@ -33,7 +33,15 @@ const App = ({filters, reviews}:AppProps): JSX.Element => {
         <Route path={AppRoute.Root}>
           <Route index element={<Main filters={filters} />}/>
           <Route path={AppRoute.Login} element={<Login/>}/>
-          <Route path={AppRoute.Room} element={<Room reviews={reviews} />}/>
+          <Route
+            path={`${AppRoute.Room}:id`}
+            element={<Room
+              currentOffer={currentOffer}
+              currentOfferId={currentOfferId}
+              nearOffers={nearOffers}
+              isOfferDataLoading={isOfferDataLoading}
+            />}
+          />
           <Route path='*' element={<NotFound/>}/>
         </Route>
       </Routes>

@@ -27,8 +27,7 @@ const CityList = (): JSX.Element => {
                 </a>
               </li>
             );
-          }
-          )}
+          })}
         </ul>
       </section>
     </div>

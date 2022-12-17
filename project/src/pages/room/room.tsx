@@ -1,147 +1,139 @@
 import Offers from '../../components/offers/offers';
-
-import { TReview} from '../../types/types';
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import Header from '../../components/header/header';
-import React from 'react';
+import {MAX_IMAGES_COUNT_IN_OFFER, MAX_NEAR_OFFERS} from '../../const';
+import {convertRating} from '../../util';
+import cn from 'classnames';
+import React, {useEffect} from 'react';
+import NotFound from '../not-found/not-found';
+import {fetchNearOffersAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {loadOffer, loadReviews} from '../../store/action';
+import {TOffer} from '../../types/types';
 
 
 type RoomProps = {
-  reviews:TReview[];
+  currentOffer: TOffer | undefined;
+  currentOfferId: number;
+  nearOffers: TOffer[];
+  isOfferDataLoading: boolean;
 }
 
-const Room = ({reviews}:RoomProps): JSX.Element => {
-  const OfferList = useAppSelector((state) => state.offerListSortedByCity);
+const Room = ({currentOffer, currentOfferId, nearOffers, isOfferDataLoading}: RoomProps): JSX.Element => {
 
-  return(
+  //const {currentOffer, currentOfferId, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  console.log(currentOfferId);
+  console.log(currentOffer);
+
+  useEffect(() => {
+    if (currentOfferId) {
+      //dispatch(fetchOfferAction(currentOfferId));
+      dispatch(fetchReviewsAction(currentOfferId));
+      dispatch(fetchNearOffersAction(currentOfferId));
+    }
+    return () => {
+      dispatch(loadOffer(undefined));
+      dispatch(loadReviews([]));
+    };
+  }, [currentOfferId]);
+
+  if (!currentOffer && isOfferDataLoading) {
+    return (
+      <LoadingScreen />
+      //<NotFound/>
+    );
+  }
+
+  return !currentOffer ? <NotFound/> : (
     <>
       <Header/>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+              {currentOffer.images.slice(0, MAX_IMAGES_COUNT_IN_OFFER).map((image) => (
+                <div key ={image} className="property__image-wrapper">
+                  <img className="property__image" src={image} alt="Photo studio"/>
+                </div>
+              ))}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {currentOffer.isPremium &&
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {currentOffer.title}
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}}/>
+                  <span style={convertRating(currentOffer.rating)}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{currentOffer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+                  {currentOffer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {currentOffer.bedrooms} {currentOffer.bedrooms > 1 ? ' Bedrooms' : ' Bedroom' }
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  Max {currentOffer.maxAdults} {currentOffer.maxAdults > 1 ? ' adults' : ' adult' }
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{currentOffer.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+                  {currentOffer.goods.map((good) => (
+                    <li className="property__inside-item" key={good}>
+                      {good}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={cn('property__avatar-wrapper', 'user__avatar-wrapper', {'property__avatar-wrapper--pro': currentOffer.host.isPro} )}>
                     <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74"
                       alt="Host avatar"
                     />
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                    {currentOffer.host.name}
                   </span>
-                  <span className="property__user-status">
-                    Pro
-                  </span>
+                  {currentOffer.host.isPro &&
+                    <span className="property__user-status">
+                      Pro
+                    </span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where
-                    the
-                    bustle of the city comes to rest in this alley flowery and colorful.
+                    {currentOffer.description}
                   </p>
                 </div>
               </div>
-              <Reviews reviews={reviews}/>
+              <Reviews />
             </div>
           </div>
           <Map
-            selectedCity={'Paris'}//временное решение
-            points={OfferList.slice(0, 3)}
+            selectedCity={currentOffer.location}
+            currentOfferLocation={currentOffer.location}
+            points={nearOffers.slice(0, MAX_NEAR_OFFERS)}
             main={false}
           />
         </section>
@@ -149,7 +141,7 @@ const Room = ({reviews}:RoomProps): JSX.Element => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <Offers
-              offers={OfferList.slice(0, 3)}
+              offers={nearOffers.slice(0, MAX_NEAR_OFFERS)}
               main={false}
             />
           </section>

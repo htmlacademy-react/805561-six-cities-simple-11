@@ -7,6 +7,7 @@ import CityList from '../../components/city-list/city-list';
 import {useAppSelector} from '../../hooks';
 import Filter from '../../components/sort/sort';
 import MainEmpty from '../main-empty/main-empty';
+import {CITY} from '../../const';
 
 
 type MainProps = {
@@ -46,7 +47,7 @@ function Main({filters}: MainProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                selectedCity={selectedCity}
+                selectedCity={CITY[selectedCity]}
                 points={selectedOffers}
                 selectedPoint={selectedPoint}
                 main

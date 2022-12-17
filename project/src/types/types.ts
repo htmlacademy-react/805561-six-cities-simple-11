@@ -17,7 +17,7 @@ export type TOffer = {
     name: string;
   };
   id: number;
-  images: [string];
+  images: string[];
   isPremium: boolean;
   location: {
     latitude: number;
@@ -32,9 +32,15 @@ export type TOffer = {
   type: string;
 }
 
+export type TLocation = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type TCity = {
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   zoom: number;
 };
 
@@ -42,14 +48,27 @@ export type TCities = {
   [propertyName: string]: TCity;
 };
 
-export type TReview = {
+/*export type TReview = {
   id: number;
   avatar: string;
   userName: string;
   rating: number;
   text: string;
   time: string;
-};
+};*/
+
+export type TReview ={
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+}
 
 export type AuthData = {
   login: string;

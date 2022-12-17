@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 
 import {store} from './store';
-import {ReviewsData} from './mocks/reviews_mocks';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
 import {FILTERS} from './const';
@@ -21,10 +20,7 @@ root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ErrorMessage />
-      <App
-        filters={FILTERS}
-        reviews={ReviewsData}
-      />
+      <App filters={FILTERS} />
     </Provider>
   </React.StrictMode>,
 );

@@ -2,11 +2,12 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
 import {TOffer} from '../../types/types';
+import {convertRating} from '../../util';
+import {useAppDispatch} from '../../hooks';
 
-const convertRating = (rating:number) => {
-  const widtth = `${Math.round(rating) * 20 }%`;
-  return {width: widtth};
-};
+import {setCurrentOfferId} from '../../store/action';
+import {fetchOfferAction} from '../../store/api-actions';
+
 
 type OfferProps = {
   offer:TOffer;
@@ -16,9 +17,14 @@ type OfferProps = {
 
 const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
   const className = main ? 'cities' : 'near-places';
+  const dispatch = useAppDispatch();
 
   return(
-    <article key={offer.id} className={`${className}__card place-card`} onMouseOver={() => mouseOverHandler(offer.id)} >
+    <article
+      key={offer.id}
+      className={`${className}__card place-card`}
+      onMouseOver={() => mouseOverHandler(offer.id)}
+    >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div> }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
@@ -39,8 +45,13 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{offer.title}</Link>
+        <h2 className="place-card__name"
+          onClick={() => {
+            dispatch(fetchOfferAction(offer.id));
+            dispatch(setCurrentOfferId(offer.id));
+          }}
+        >
+          <Link to={`${AppRoute.Room}${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

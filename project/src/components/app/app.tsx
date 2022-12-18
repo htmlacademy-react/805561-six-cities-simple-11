@@ -6,18 +6,16 @@ import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
 import Room from '../../pages/room/room';
 import NotFound from '../../pages/not-found/not-found';
-import {TReview} from '../../types/types';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 
 type AppProps = {
   filters: string[];
-  reviews: TReview[];
 }
 
-const App = ({filters, reviews}:AppProps): JSX.Element => {
+const App = ({filters}:AppProps): JSX.Element => {
 
   const {isOffersDataLoading, authorizationStatus} = useAppSelector((state) => state);
 
@@ -31,10 +29,26 @@ const App = ({filters, reviews}:AppProps): JSX.Element => {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<Main filters={filters} />}/>
-          <Route path={AppRoute.Login} element={<Login/>}/>
-          <Route path={AppRoute.Room} element={<Room reviews={reviews} />}/>
-          <Route path='*' element={<NotFound/>}/>
+          <Route
+            index
+            element={
+              <Main
+                filters={filters}
+              />
+            }
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<Login/>}
+          />
+          <Route
+            path={`${AppRoute.Room}:id`}
+            element={<Room/>}
+          />
+          <Route
+            path='*'
+            element={<NotFound/>}
+          />
         </Route>
       </Routes>
     </HistoryRouter>

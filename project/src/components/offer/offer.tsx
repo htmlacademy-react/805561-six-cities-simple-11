@@ -1,24 +1,28 @@
 import {Link} from 'react-router-dom';
+
 import {AppRoute} from '../../const';
-
 import {TOffer} from '../../types/types';
+import {convertRating} from '../../util';
+import {useAppDispatch} from '../../hooks';
+import {setCurrentOfferId} from '../../store/action';
 
-const convertRating = (rating:number) => {
-  const widtth = `${Math.round(rating) * 20 }%`;
-  return {width: widtth};
-};
 
 type OfferProps = {
   offer:TOffer;
-  mouseOverHandler: (offer: number) => void;
+  onMouseOverHandler: (offer: number) => void;
   main: boolean;
 }
 
-const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
+const Offer = ({offer, onMouseOverHandler, main}: OfferProps): JSX.Element =>{
   const className = main ? 'cities' : 'near-places';
+  const dispatch = useAppDispatch();
 
   return(
-    <article key={offer.id} className={`${className}__card place-card`} onMouseOver={() => mouseOverHandler(offer.id)} >
+    <article
+      key={offer.id}
+      className={`${className}__card place-card`}
+      onMouseOver={() => onMouseOverHandler(offer.id)}
+    >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div> }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
@@ -39,8 +43,12 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{offer.title}</Link>
+        <h2 className="place-card__name"
+          onClick={() => {
+            dispatch(setCurrentOfferId(offer.id));
+          }}
+        >
+          <Link to={`${AppRoute.Room}${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

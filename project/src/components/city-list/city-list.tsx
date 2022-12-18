@@ -1,11 +1,12 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import cn from 'classnames';
-import {sortByCity, selectionCity} from '../../store/action';
-import {CITIES} from '../../const';
+import {sortByCity, selectionCity, sortByFilter, selectionFilter} from '../../store/action';
+import {CITIES, INITIAL_SORT} from '../../const';
 
 
 const CityList = (): JSX.Element => {
+
   const selectedCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
@@ -20,6 +21,8 @@ const CityList = (): JSX.Element => {
                 onClick={() => {
                   dispatch(selectionCity(city));
                   dispatch(sortByCity());
+                  dispatch(selectionFilter(INITIAL_SORT));
+                  dispatch(sortByFilter());
                 }}
               >
                 <a className={cn('locations__item-link', 'tabs__item', {'tabs__item--active':isActive})} href="#">
@@ -27,11 +30,11 @@ const CityList = (): JSX.Element => {
                 </a>
               </li>
             );
-          }
-          )}
+          })}
         </ul>
       </section>
     </div>
   );
 };
+
 export default CityList;

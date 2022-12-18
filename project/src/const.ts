@@ -2,7 +2,7 @@ import {TCities} from './types/types';
 
 export enum AppRoute {
   Login = '/login',
-  Room = '/offer/:id',
+  Room = '/offer/',
   Root = '/'
 }
 
@@ -24,33 +24,33 @@ export enum AuthorizationStatus {
 
 export const CITY: TCities = {
   Paris: {
-    lat: 48.8534100,
-    lng: 2.3488000,
+    latitude: 48.8534100,
+    longitude: 2.3488000,
     zoom: 12,
   },
   Cologne: {
-    lat: 50.9333300,
-    lng: 6.9500000,
+    latitude: 50.9333300,
+    longitude: 6.9500000,
     zoom: 12,
   },
   Brussels: {
-    lat: 50.8504500,
-    lng: 4.3487800,
+    latitude: 50.8504500,
+    longitude: 4.3487800,
     zoom: 12,
   },
   Amsterdam:{
-    lat: 52.3740300,
-    lng: 4.8896900,
+    latitude: 52.3740300,
+    longitude: 4.8896900,
     zoom: 12,
   },
   Hamburg: {
-    lat: 53.5753200,
-    lng: 10.0153400,
+    latitude: 53.5753200,
+    longitude: 10.0153400,
     zoom: 12,
   },
   Dusseldorf: {
-    lat: 51.2217200,
-    lng: 6.7761600,
+    latitude: 51.2217200,
+    longitude: 6.7761600,
     zoom: 12,
   }
 };
@@ -65,8 +65,17 @@ export const URL_MARKER_CURRENT = '../img/pin-active.svg';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
+export const REVIEWS_MAX_COUNT = 10;
+
 export enum APIRoute {
   Main = '/hotels',
+  Room = '/hotels/',
+  Near = '/hotels/',
   Login = '/login',
   Logout = '/logout',
+  Review = '/comments/',
+  Comment = '/comments/'
 }
+
+export const MAX_IMAGES_COUNT_IN_OFFER = 6;
+export const MAX_NEAR_OFFERS = 3;

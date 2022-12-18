@@ -24,7 +24,8 @@ const Login = (): JSX.Element => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      const formatEmail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+
+      const formatEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/i;
       const formatPassword = /[0-9]+[А-ЯA-Z]+$/i;
       const validEmail = formatEmail.test(loginRef.current.value);
       const validPassword = formatPassword.test(passwordRef.current.value);

@@ -2,13 +2,12 @@ import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT, CITY} from '../../const';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 import {TCity, TLocation, TOffer} from '../../types/types';
 import useMap from '../../hooks/useMap';
 
 
 type MapProps = {
-  //selectedCity: string;
   selectedCity: TCity;
   points: TOffer[];
   selectedPoint?: number;
@@ -30,7 +29,7 @@ const currentCustomIcon = leaflet.icon({
 
 function Map({points, selectedCity, selectedPoint, main, currentOfferLocation}:MapProps): JSX.Element {
 
-  //const currentCity: TCity = CITY[selectedCity];
+
   const currentCity: TCity = selectedCity;
 
   const mapRef = useRef(null);

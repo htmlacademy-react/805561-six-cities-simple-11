@@ -11,24 +11,26 @@ import NotFound from '../not-found/not-found';
 import {fetchNearOffersAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {loadOffer, loadReviews} from '../../store/action';
+import {useParams} from 'react-router-dom';
 
 
 const Room = (): JSX.Element => {
 
-  const {currentOffer, currentOfferId, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
+  const {currentOffer, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const params = useParams<{id: string}>();
 
   useEffect(() => {
-    if (currentOfferId) {
-      dispatch(fetchOfferAction(currentOfferId));
-      dispatch(fetchReviewsAction(currentOfferId));
-      dispatch(fetchNearOffersAction(currentOfferId));
+    if (Number(params.id)) {
+      dispatch(fetchOfferAction(Number(params.id)));
+      dispatch(fetchReviewsAction(Number(params.id)));
+      dispatch(fetchNearOffersAction(Number(params.id)));
     }
     return () => {
       dispatch(loadOffer(undefined));
       dispatch(loadReviews([]));
     };
-  }, [currentOfferId]);
+  }, [Number(params.id)]);
 
   if (!currentOffer && isOfferDataLoading) {
     return (

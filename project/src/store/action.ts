@@ -2,6 +2,7 @@ import {createAction} from '@reduxjs/toolkit';
 import {TOffer, TReview} from '../types/types';
 import {AppRoute, AuthorizationStatus} from '../const';
 
+
 export const selectionCity = createAction('offers/selectionCity',
   (value: string) => ({
     payload: value,

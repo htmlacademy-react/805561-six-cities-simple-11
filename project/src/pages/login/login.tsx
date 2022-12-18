@@ -24,10 +24,17 @@ const Login = (): JSX.Element => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
+      const formatEmail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+      const formatPassword = /[0-9]+[А-ЯA-Z]+$/i;
+      const validEmail = formatEmail.test(loginRef.current.value);
+      const validPassword = formatPassword.test(passwordRef.current.value);
+
+      if(validEmail && validPassword) {
+        onSubmit({
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        });
+      }
     }
   };
 

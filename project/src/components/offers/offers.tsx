@@ -1,6 +1,10 @@
 import cn from 'classnames';
 import {TOffer} from '../../types/types';
 import Offer from '../offer/offer';
+import {useEffect} from 'react';
+import { sortByCity, sortByFilter} from '../../store/action';
+import {useAppDispatch} from '../../hooks';
+
 
 type OffersProps = {
   offers:TOffer[];
@@ -8,9 +12,9 @@ type OffersProps = {
   main: boolean;
 }
 
-
 const Offers = ({offers, onListOfferHover, main}: OffersProps): JSX.Element => {
 
+  const dispatch = useAppDispatch();
   const className = cn(
     'places__list',
     {'cities__places-list': main,
@@ -19,18 +23,23 @@ const Offers = ({offers, onListOfferHover, main}: OffersProps): JSX.Element => {
     }
   );
 
-  const mouseOverHandler = (id:number): void => {
+  const onMouseOverHandler = (id:number): void => {
     if(onListOfferHover){
       onListOfferHover(id);
     }
   };
+
+  useEffect(() => {
+    dispatch(sortByCity());
+    dispatch(sortByFilter());
+  }, []);
 
   return (
     <div className={className}>
       {offers.map((offer: TOffer) =>
         (
           <Offer
-            mouseOverHandler={mouseOverHandler}
+            onMouseOverHandler={onMouseOverHandler}
             key={offer.id}
             offer={offer}
             main={main}

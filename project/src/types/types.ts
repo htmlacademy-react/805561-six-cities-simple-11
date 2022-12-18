@@ -48,15 +48,6 @@ export type TCities = {
   [propertyName: string]: TCity;
 };
 
-/*export type TReview = {
-  id: number;
-  avatar: string;
-  userName: string;
-  rating: number;
-  text: string;
-  time: string;
-};*/
-
 export type TReview ={
   comment: string;
   date: string;
@@ -68,6 +59,12 @@ export type TReview ={
     isPro: boolean;
     name: string;
   };
+}
+
+export type TComment ={
+  comment: string;
+  rating: number;
+  id: number;
 }
 
 export type AuthData = {

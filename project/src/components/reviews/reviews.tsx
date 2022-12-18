@@ -12,9 +12,14 @@ const Reviews = (): JSX.Element => {
 
   return(
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title">
+        Reviews &middot;
+        <span className="reviews__amount">
+          {(reviews.length < REVIEWS_MAX_COUNT) ? reviews.length : REVIEWS_MAX_COUNT}
+        </span>
+      </h2>
       <ul className="reviews__list">
-        {reviews.slice(0, REVIEWS_MAX_COUNT).map((review: TReview) =>
+        {reviews.slice().reverse().slice(0, REVIEWS_MAX_COUNT).map((review: TReview) =>
           (
             <Review
               key={review.id}

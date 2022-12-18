@@ -12,7 +12,7 @@ import {
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR, AppRoute} from '../const';
-import {AuthData, TOffer, TReview, UserData} from '../types/types';
+import {AuthData, TComment, TOffer, TReview, UserData} from '../types/types';
 import {store} from './';
 
 export const clearErrorAction = createAsyncThunk(
@@ -121,5 +121,18 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+  },
+);
+
+export const addCommentAction = createAsyncThunk<void, TComment, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/addComment',
+  async ({comment,rating, id}, {dispatch, extra: api}) => {
+    await api.post<TComment>(`${APIRoute.Comment}${id}`, {comment, rating});
+    const {data} = await api.get<TReview[]>(`${APIRoute.Comment}${id}`);
+    dispatch(loadReviews(data));
   },
 );

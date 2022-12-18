@@ -1,21 +1,19 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
 
+import {AppRoute} from '../../const';
 import {TOffer} from '../../types/types';
 import {convertRating} from '../../util';
 import {useAppDispatch} from '../../hooks';
-
 import {setCurrentOfferId} from '../../store/action';
-import {fetchOfferAction} from '../../store/api-actions';
 
 
 type OfferProps = {
   offer:TOffer;
-  mouseOverHandler: (offer: number) => void;
+  onMouseOverHandler: (offer: number) => void;
   main: boolean;
 }
 
-const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
+const Offer = ({offer, onMouseOverHandler, main}: OfferProps): JSX.Element =>{
   const className = main ? 'cities' : 'near-places';
   const dispatch = useAppDispatch();
 
@@ -23,7 +21,7 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
     <article
       key={offer.id}
       className={`${className}__card place-card`}
-      onMouseOver={() => mouseOverHandler(offer.id)}
+      onMouseOver={() => onMouseOverHandler(offer.id)}
     >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div> }
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
@@ -47,7 +45,6 @@ const Offer = ({offer, mouseOverHandler, main}: OfferProps): JSX.Element =>{
         </div>
         <h2 className="place-card__name"
           onClick={() => {
-            dispatch(fetchOfferAction(offer.id));
             dispatch(setCurrentOfferId(offer.id));
           }}
         >

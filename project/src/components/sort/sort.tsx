@@ -8,7 +8,7 @@ type SortProps = {
   filters:string[];
 }
 
-const Filter = ({filters}: SortProps): JSX.Element => {
+const Sort = ({filters}: SortProps): JSX.Element => {
   const {currentFilter} = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
@@ -43,4 +43,4 @@ const Filter = ({filters}: SortProps): JSX.Element => {
     </form>
   );
 };
-export default Filter;
+export default Sort;

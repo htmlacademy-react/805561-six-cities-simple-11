@@ -1,5 +1,6 @@
 import {TReview} from '../../types/types';
 import {convertRating} from '../../util';
+import dayjs from 'dayjs';
 
 
 type ReviewProps = {
@@ -22,7 +23,7 @@ const Review = ({review}: ReviewProps): JSX.Element =>(
         </div>
       </div>
       <p className="reviews__text">{review.comment} </p>
-      <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
+      <time className="reviews__time" dateTime="2019-04-24">{dayjs(review.date).format('MMMM YYYY')}</time>
     </div>
   </li>
 );

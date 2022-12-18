@@ -73,7 +73,8 @@ export enum APIRoute {
   Near = '/hotels/',
   Login = '/login',
   Logout = '/logout',
-  Review = '/comments/'
+  Review = '/comments/',
+  Comment = '/comments/'
 }
 
 export const MAX_IMAGES_COUNT_IN_OFFER = 6;

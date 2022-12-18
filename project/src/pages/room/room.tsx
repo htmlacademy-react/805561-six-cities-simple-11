@@ -11,27 +11,16 @@ import NotFound from '../not-found/not-found';
 import {fetchNearOffersAction, fetchOfferAction, fetchReviewsAction} from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {loadOffer, loadReviews} from '../../store/action';
-import {TOffer} from '../../types/types';
 
 
-type RoomProps = {
-  currentOffer: TOffer | undefined;
-  currentOfferId: number;
-  nearOffers: TOffer[];
-  isOfferDataLoading: boolean;
-}
+const Room = (): JSX.Element => {
 
-const Room = ({currentOffer, currentOfferId, nearOffers, isOfferDataLoading}: RoomProps): JSX.Element => {
-
-  //const {currentOffer, currentOfferId, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
+  const {currentOffer, currentOfferId, nearOffers, isOfferDataLoading} = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-
-  console.log(currentOfferId);
-  console.log(currentOffer);
 
   useEffect(() => {
     if (currentOfferId) {
-      //dispatch(fetchOfferAction(currentOfferId));
+      dispatch(fetchOfferAction(currentOfferId));
       dispatch(fetchReviewsAction(currentOfferId));
       dispatch(fetchNearOffersAction(currentOfferId));
     }
@@ -44,7 +33,6 @@ const Room = ({currentOffer, currentOfferId, nearOffers, isOfferDataLoading}: Ro
   if (!currentOffer && isOfferDataLoading) {
     return (
       <LoadingScreen />
-      //<NotFound/>
     );
   }
 
